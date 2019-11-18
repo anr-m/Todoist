@@ -2,19 +2,18 @@
 //  Item.swift
 //  Todoist
 //
-//  Created by Anuar on 10/30/19.
+//  Created by Anuar on 11/8/19.
 //  Copyright © 2019 Anuarbek Mukhanov. All rights reserved.
 //
 
 import Foundation
+import RealmSwift
 
-import Foundation
-
-class Item: Codable {
-    var title: String
-    var done: Bool = false
+class Item: Object {
+    @objc dynamic var title: String = "" 
+    @objc dynamic var done: Bool = false
+    @objc dynamic var dateCreated: Date = Date()
     
-    init(title: String) {
-        self.title = title
-    }
+    // Defines insverse relationship; to define type we used Category.self
+    var parentCategory = LinkingObjects(fromType: Category.self, property: "items")
 }
